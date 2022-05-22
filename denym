@@ -1,13 +1,14 @@
 #!/bin/bash
 
-
-
-options=("zip" "unzip" "zip-all" "unzip-all" "exit")
-
+# variables
 eco() { echo -e "\n\n\n"; }
 ls-c() { clear; eco; ls --color; echo -e "\n"; }
 ls-() { eco; ls --color; echo -e "\n"; }
 
+# options
+options=("zip" "unzip" "zip-all" "unzip-all" "exit")
+
+# zip selected item
 zip_d() {
 	ls-c
 	echo -e "zipping selected item..."
@@ -22,6 +23,7 @@ zip_d() {
 	ls-
 }
 
+# unzip selected item
 unzip_d() {
 	ls-c
 	echo -e "unzipping selected item..."
@@ -30,6 +32,7 @@ unzip_d() {
 	ls-
 }
 
+# zip all compressed items
 zip_a() {
 	ls-c
 	echo -e "compressing all items..."
@@ -49,6 +52,7 @@ zip_a() {
 	ls-
 }
 
+# unzip all compressed items
 unzip_a() {
 	ls-c
 	echo -e "extracting all compressed items..."
