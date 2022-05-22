@@ -1,0 +1,101 @@
+#!/bin/bash
+
+
+
+options=("zip" "unzip" "zip-all" "unzip-all" "exit")
+
+eco() { echo -e "\n\n\n"; }
+ls-c() { clear; eco; ls --color; echo -e "\n"; }
+ls-() { eco; ls --color; echo -e "\n"; }
+
+zip_d() {
+	ls-c
+	echo -e "zipping selected item..."
+	read -p "zip item: " item
+	read -p "current date: " current_date
+	if [[ $current_date = "" ]]
+	then
+		zip -r "$item".zip "$item"
+	else
+		zip -r "$item"_$current_date.zip "$item"
+	fi
+	ls-
+}
+
+unzip_d() {
+	ls-c
+	echo -e "unzipping selected item..."
+	read -p "unzip item: " item
+	unzip *"$item"*
+	ls-
+}
+
+zip_a() {
+	ls-c
+	echo -e "compressing all items..."
+	read -p "current date: " current_date
+	for item in *
+	do
+		if [[ $current_date = "" ]]
+		then
+
+		        echo -e "zipping "$item""
+			zip -r "$item".zip "$item"
+		else
+		        echo -e "zipping "$item""
+			zip -r "$item"_$current_date.zip "$item"
+		fi
+	done
+	ls-
+}
+
+unzip_a() {
+	ls-c
+	echo -e "extracting all compressed items..."
+	for item in *
+	do
+		if [[ "$item" = *.zip* ]]
+		then
+			echo -e "unzipping "$item""
+			unzip "$item"
+		fi
+	done
+	ls-
+}
+
+main() {
+	clear
+	eco
+	PS3="-> "
+	select option in "${options[@]}"
+	do
+		case $option in
+			"zip")
+				zip_d
+				break
+				;;
+			"unzip")
+				unzip_d
+				break
+				;;
+			"zip-all")
+				zip_a
+				break
+				;;
+			"unzip-all")
+				unzip_a
+				break
+				;;
+			"exit")
+				clear
+				eco
+				break
+				;;
+			*)
+				echo "invalid selection"
+				;;
+		esac
+	done
+}
+
+main
