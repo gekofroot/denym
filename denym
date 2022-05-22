@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# zip/unzip directory contents
+# GNU Affero General Public License v3.0
+
+
 # variables
 eco() { echo -e "\n\n\n"; }
 ls-c() { clear; eco; ls --color; echo -e "\n"; }
